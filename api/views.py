@@ -5,10 +5,12 @@ from rest_framework import permissions, filters
 from api.serializers import TodoSerializers
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
+from api.pagination import CustomPageNumberPagination
 # Create your views here.
 
 class TodoAPIView(ListCreateAPIView):
     serializer_class = TodoSerializers
+    pagination_class = CustomPageNumberPagination
     permission_classes = (IsAuthenticated,)
     filter_backends=[DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['id', 'title', 'completed']
